@@ -47,9 +47,6 @@ DVelite-QmC Cy5, Cy5, lumencor-Cy5, DV-SSI-Quad-mCh T, DV-EM-Cy5 T :: DV-SSI-Qua
 DVelite-CYmC mCherry, mCherry, lumencor-mCherry, DV-SSI-C-YFP-mCh T, DV-EM-mCherry T :: DV-SSI-C-YFP-mCh R
 DVelite-CYmC-CFP, CFP, lumencor-CFP, DV-SSI-C-YFP-mCh T, DV-EM-CFP T :: DV-SSI-C-YFP-mCh R
 DVelite-CYmC-YFP, YFP, lumencor-YFP, DV-SSI-C-YFP-mCh T, DV-EM-YFP T :: DV-SSI-C-YFP-mCh R
-//NanoImager
-NanoImager Ch1, Alexa-546, 532-laser , NI-EX-dichroic T, NI-EM-splitter R, NI-ch1f1 T, NI-ch1f2 T:: NI-EX-dichroic R
-NanoImager Ch2, Alexa-647, 647-laser , NI-EX-dichroic T, NI-EM-splitter T, NI-ch2f1 T, NI-ch2f2 T:: NI-EX-dichroic R
 //LSM 880 biochem-upright no dichroics as yet
 Z880-DAPI-A88 DAPI, DAPI, 405-laser, BP420-480_BP495-550 T
 Z880-DAPI-A488 A488, Alexa-488, 488-laser, BP420-480_BP495-550 T
