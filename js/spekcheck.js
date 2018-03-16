@@ -462,6 +462,7 @@ function deepCopy( src ) {
 }
 
 function drawPlot(dye, excitation, filters, filterModes, exFilters, exFilterModes) {
+    
     // Create chart if it doesn't exist.
     if (!CHART) {
         var ctx = $( "#chart" )[0].getContext("2d");
@@ -483,6 +484,7 @@ function drawPlot(dye, excitation, filters, filterModes, exFilters, exFilterMode
                 showLines: true,
             }
         });
+
         CHART.options.scales.xAxes[0].scaleLabel.display = true;
         CHART.options.scales.xAxes[0].scaleLabel.labelString = "Wavelength / nm";
         // Set chart height now, and on window resize.
@@ -495,7 +497,12 @@ function drawPlot(dye, excitation, filters, filterModes, exFilters, exFilterMode
         resizeChart();
         $(window).resize(resizeChart);
     }
-
+    //define a gradient fill
+    ctx = $( "#chart" )[0].getContext("2d");
+    var gradientFill = ctx.createLinearGradient(500, 0, 100, 0);
+    gradientFill.addColorStop(0, "rgba(128, 182, 244, 0.6)");
+    gradientFill.addColorStop(1, "rgba(244, 144, 128, 0.6)");
+    
     // Calculate excitation emission efficiency, brightness and spectra.
     var effBright = calcEffAndBright(EXSET,EMSET);
     var e_eff = effBright.e_eff ;
@@ -574,7 +581,7 @@ function drawPlot(dye, excitation, filters, filterModes, exFilters, exFilterMode
         addToChart({
                 label: key,
                 data: data,
-                backgroundColor: bg,
+                backgroundColor: gradientFill,
                 pointRadius: 0,
                 borderDash: borderDash,
                 borderColor: fg,
