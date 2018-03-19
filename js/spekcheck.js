@@ -499,10 +499,18 @@ function drawPlot(dye, excitation, filters, filterModes, exFilters, exFilterMode
     }
     //define a gradient fill
     ctx = $( "#chart" )[0].getContext("2d");
-    var gradientFill = ctx.createLinearGradient(500, 0, 100, 0);
-    gradientFill.addColorStop(0, "rgba(128, 182, 244, 0.6)");
-    gradientFill.addColorStop(1, "rgba(244, 144, 128, 0.6)");
+    var width = $( CHART.canvas ).width()
+    var height = $( CHART.canvas ).height()
     
+    var gradientFill = ctx.createLinearGradient(0,0,width,0);
+    gradientFill.addColorStop(0, "hsla(300, 100%, 0%, 1)");
+    gradientFill.addColorStop(((350-300)/(800-300)), "hsla(300, 100%, 50%, 1)");
+    gradientFill.addColorStop(((450-300)/(800-300)), "hsla(220, 100%, 50%, 1)");
+    gradientFill.addColorStop(((550-300)/(800-300)), "hsla(100, 100%, 50%, 1)");
+    gradientFill.addColorStop(((590-300)/(800-300)), "hsla(65, 100%, 50%, 1)");
+    gradientFill.addColorStop(((650-300)/(800-300)), "hsla(0, 100%, 50%, 1)");
+    gradientFill.addColorStop(1, "hsla(0, 100%, 0%, 1)");
+			      
     // Calculate excitation emission efficiency, brightness and spectra.
     var effBright = calcEffAndBright(EXSET,EMSET);
     var e_eff = effBright.e_eff ;
@@ -581,7 +589,7 @@ function drawPlot(dye, excitation, filters, filterModes, exFilters, exFilterMode
         addToChart({
                 label: key,
                 data: data,
-                backgroundColor: gradientFill,
+                backgroundColor: bg,
                 pointRadius: 0,
                 borderDash: borderDash,
                 borderColor: fg,
@@ -625,7 +633,8 @@ function drawPlot(dye, excitation, filters, filterModes, exFilters, exFilterMode
     if(SPECTRA["transmitted"]) {
         var hue = wavelengthToHue(SPECTRA["transmitted"].peakwl());
         transTrace.data = SPECTRA["transmitted"].points();
-        transTrace.backgroundColor = `hsla(${hue}, 100%, 50%, 0.8)`;
+        transTrace.backgroundColor = gradientFill;
+	//`hsla(${hue}, 100%, 50%, 0.8)`;
     } else {
         //if there is no transmitted trace then null the data
         CHART.data.datasets.filter( item => item.label == "transmitted")[0].data=null
