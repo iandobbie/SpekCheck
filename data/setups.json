@@ -208,5 +208,117 @@
 		}
 	    ]
 	}
-    ]    
+    ],    
+    [
+	"Aurox DAPI",
+	{
+	    "detector": null,
+	    "dye": "DAPI",
+	    "excitation": "Lumencor-SOLA",
+	    "ex_path": [
+		{
+		    "filter": "EX-392-23",
+		    "mode": "t"
+		},
+		{
+		    "filter": "FF409",
+		    "mode": "r"
+		}
+	    ],
+	  "em_path": [
+	      {
+		  "filter": "EM-447-60",
+		  "mode": "t"
+	      },
+	      {
+		  "filter": "FF409",
+		  "mode": "t"
+	      }
+	  ]
+	}
+    ],
+    [
+	"Aurox GFP",
+	{
+	    "detector": null,
+	    "dye": "GFP",
+	    "excitation": "Lumencor-SOLA",
+	    "ex_path": [
+		{
+		    "filter": "FF495",
+		    "mode": "r"
+		},
+		{
+		    "filter": "EX-466-40",
+		    "mode": "t"
+		}
+	    ],
+	    "em_path": [
+		{
+		    "filter": "FF495",
+		    "mode": "t"
+		},
+		{
+		    "filter": "EM-525-45",
+		    "mode": "t"
+		}
+	    ]
+	}
+    ],
+    [
+	"Aurox Red",
+	{
+	    "detector": null,
+	    "dye": "mScarlet",
+	    "excitation": "Lumencor-SOLA",
+	    "ex_path": [
+		{
+		    "filter": "EX-554-23",
+		    "mode": "t"
+		},
+		{
+		    "filter": "FF573",
+		    "mode": "r"
+		}
+	    ],
+	    "em_path": [
+		{
+		    "filter": "FF573",
+		    "mode": "t"
+		},
+		{
+		    "filter": "EM-609-54",
+		    "mode": "t"
+		}
+	    ]
+	}
+    ],
+    [
+	"Aurox Cy5",
+	{
+	    "detector": null,
+	    "dye": "Cy5",
+	    "excitation": "Lumencor-SOLA",
+	    "ex_path": [
+		{
+		    "filter": "FF652",
+		    "mode": "r"
+		},
+		{
+		    "filter": "EX-635-18",
+		    "mode": "t"
+		}
+	    ],
+	    "em_path": [
+		{
+		    "filter": "FF652",
+		    "mode": "t"
+		},
+		{
+		    "filter": "EM-680-42",
+		    "mode": "t"
+		}
+	    ]
+	}
+    ]
 ]
