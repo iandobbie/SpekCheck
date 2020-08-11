@@ -1400,6 +1400,7 @@ class SetupPlot extends View
                 datasets: [],
             },
             options: {
+		animation: false,
                 title: {
                     fontSize: 24,
                 },
