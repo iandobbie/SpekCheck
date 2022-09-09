@@ -1927,6 +1927,11 @@ class SpekCheck
         this.$el.find('#save-plot-button').on('click',
                                               this.savePlot.bind(this));
 
+	//change display min/max
+	this.$el.find('#display-min-max').on('click',
+                                              this.displayMinMax.bind(this));
+	
+
         // Note that there's no SelectView for the filters.  Those are
         // not selectable, they're part of the path customisation GUI.
         this.view = {};
@@ -2138,6 +2143,28 @@ class SpekCheck
         ev.target.download = 'spekcheck-' + uid + '.png';
 
         ev.target.href = this.plot.downloadLink('image/png');
+    }
+    
+    displayMinMax(ev){
+	let currentMin=this.plot.plot.scales.x.min
+	let currentMax=this.plot.plot.scales.x.max
+	
+	let inputMinMax=window.prompt("Min,Max display range",
+				      currentMin.toString()+', '+
+				      currentMax.toString());
+	let values=inputMinMax.split(",");
+	let minval=parseInt(values[0])
+	let maxval=parseInt(values[1])
+	console.log(inputMinMax,minval,maxval);
+	this.plot.plot.config.options.scales.x.min=minval;
+	this.plot.plot.config.options.scales.x.max=maxval;
+	
+//	this.plot.plot.scales.x.ticks.suggestedMin= val;
+
+//	console.log(this.plot.plot.scales.x.ticks.min);
+	this.plot.plot.update();
+//	console.log(this.plot.plot.scales.x.ticks.min);
+//	this.plot.options.ticks.min=val
     }
 }
 
