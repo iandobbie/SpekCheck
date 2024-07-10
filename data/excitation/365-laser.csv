@@ -1,0 +1,6 @@
+## Type: laser
+## Name: 365-laser
+wavelength,intensity
+364,0
+365,1.0
+366,0

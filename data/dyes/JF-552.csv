@@ -1,6 +1,6 @@
 ## Type: dye
 ## Name: JF552
-Extinction coefficient: 95,000
+Extinction coefficient: 95000
 Quantum Yield: 0.83
 wavelength,absorption,emission
 250, 0.210849912, 0

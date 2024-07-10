@@ -1,0 +1,6 @@
+## Type: laser
+## Name: 440-laser
+wavelength,intensity
+439,0
+440,1.0
+441,0

@@ -1,6 +1,6 @@
 ## Type: dye
 ## Name: JF-608
-Extinction coefficient: 99,000
+Extinction coefficient: 99000
 Quantum Yield: 0.67
 wavelength,absorption,emission
 250, 0.126181401, 0
