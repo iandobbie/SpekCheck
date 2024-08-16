@@ -101,5 +101,54 @@
 		}
 	    ]
 	}
-    ]
+    ],
+    [
+	"Nikon Sora Alexa555",
+	{
+  "detector": null,
+  "dye": "Alexa-555",
+  "excitation": "577-laser",
+  "ex_path": [
+    {
+      "filter": "DM-Ziva-penta",
+      "mode": "t"
+    }
+  ],
+  "em_path": [
+    {
+      "filter": "EM-Ziva-606-18",
+      "mode": "t"
+    },
+    {
+      "filter": "DM-Ziva-penta",
+      "mode": "r"
+    }
+  ]
+}
+],
+
+[
+"Nikon Sora Alexa 488",
+{
+  "detector": null,
+  "dye": "Alexa-488",
+  "excitation": "488-laser",
+  "ex_path": [
+    {
+      "filter": "DM-Ziva-penta",
+      "mode": "t"
+    }
+  ],
+  "em_path": [
+    {
+      "filter": "DM-Ziva-penta",
+      "mode": "r"
+    },
+    {
+      "filter": "EM-Ziva-531-50",
+      "mode": "t"
+    }
+  ]
+}
+]
 ]
