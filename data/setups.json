@@ -428,7 +428,90 @@
 		}
 	    ]
 	}
+	],
+    [
+	"Axioskop FITC",
+	{
+	    "detector": null,
+	    "dye": null,
+	    "excitation": "Metal-Halide-lamp",
+	    "ex_path": [
+		{
+ 		    "filter": "EX-HQ480-40x",
+		    "mode": "t"
+		},
+		{
+		    "filter": "DM-Q505LP",
+		    "mode": "r"
+		}
+	    ],
+	    "em_path": [
+		{
+		    "filter": "DM-Q505LP",
+		    "mode": "t"
+		},
+		{
+		    "filter": "EM-HQ535-50m",
+		    "mode": "t"
+		}
+	    ]
+	}
+    ],
+    [
+	"Axioskop TRITC",
+	{
+	    "detector": null,
+	    "dye": null,
+	    "excitation": "Metal-Halide-lamp",
+	    "ex_path": [
+		{
+ 		    "filter": "EX-HQ560-55x",
+		    "mode": "t"
+		},
+		{
+		    "filter": "DM-Q595LP",
+		    "mode": "r"
+		}
+	    ],
+	    "em_path": [
+		{
+		    "filter": "DM-Q595LP",
+		    "mode": "t"
+		},
+		{
+		    "filter": "EM-HQ645-75m",
+		    "mode": "t"
+		}
+	    ]
+	}
+    ],
+    [
+	"Axioskop Cy5",
+	{
+	    "detector": null,
+	    "dye": null,
+	    "excitation": "Metal-Halide-lamp",
+	    "ex_path": [
+		{
+ 		    "filter": "EX-HQ620-60x",
+		    "mode": "t"
+		},
+		{
+		    "filter": "DM-Q660LP",
+		    "mode": "r"
+		}
+	    ],
+	    "em_path": [
+		{
+		    "filter": "DM-Q660LP",
+		    "mode": "t"
+		},
+		{
+		    "filter": "EM-HQ700-75m",
+		    "mode": "t"
+		}
+	    ]
+	}
     ]
-
 ]
 
