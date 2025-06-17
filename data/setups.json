@@ -381,6 +381,54 @@
 		}
 	    ]
 	}
+    ],
+        [
+	"LLS Green",
+	{
+	    "detector": null,
+	    "dye": null,
+	    "excitation": "488-laser",
+	    "ex_path": [],
+	    "em_path": [
+		{
+		    "filter": "Zeiss-SBS-LP565",
+		    "mode": "r"
+		},
+		{
+		    "filter": "Zeiss-BP500-550_IR+",
+		    "mode": "t"
+		}
+	    ]
+	}
+	],
+        [
+	"Axioskop DAPI",
+	{
+	    "detector": null,
+	    "dye": null,
+	    "excitation": "Metal-Halide-lamp",
+	    "ex_path": [
+		{
+ 		    "filter": "EX-AT350-50x",
+		    "mode": "t"
+		},
+		{
+		    "filter": "DM-400DLCP",
+		    "mode": "r"
+		}
+	    ],
+	    "em_path": [
+		{
+		    "filter": "DM-400DLCP",
+		    "mode": "t"
+		},
+		{
+		    "filter": "EM-D460-50m",
+		    "mode": "t"
+		}
+	    ]
+	}
     ]
+
 ]
 
