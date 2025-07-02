@@ -512,6 +512,62 @@
 		}
 	    ]
 	}
+    ],
+    [
+	"AxioZoom narrow GFP",
+	{
+	    "detector": null,
+	    "dye": null,
+	    "excitation": "Metal-Halide-lamp",
+	    "ex_path": [
+		{
+		    "filter": "DM-T495lpxr",
+		    "mode": "r"
+		},
+		{
+		    "filter": "ET-480-20x",
+		    "mode": "t"
+		}
+	    ],
+	    "em_path": [
+		{
+		    "filter": "DM-T495lpxr",
+		    "mode": "t"
+		},
+		{
+		    "filter": "ET-510-20m",
+		    "mode": "t"
+		}
+	    ]
+	}
+    ],
+    [
+	"AxioZoom Green",
+	{
+	    "detector": null,
+	    "dye": null,
+	    "excitation": "Metal-Halide-lamp",
+	    "ex_path": [
+		{
+		    "filter": "DM-T495lpxr",
+		    "mode": "r"
+		},
+		{
+		    "filter": "ET-470-40x",
+		    "mode": "t"
+		}
+	    ],
+	    "em_path": [
+		{
+		    "filter": "DM-T495lpxr",
+		    "mode": "t"
+		},
+		{
+		    "filter": "ET-525-50m",
+		    "mode": "t"
+		}
+	    ]
+	}
     ]
 ]
 
