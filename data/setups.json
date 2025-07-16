@@ -425,7 +425,7 @@
 	{
 	    "detector": null,
 	    "dye": "JFx-650",
-	    "excitation": "561-laser",
+	    "excitation": "640-laser",
 	    "ex_path": [],
 	    "em_path": [
 		{
