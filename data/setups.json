@@ -401,7 +401,45 @@
 	    ]
 	}
 	],
-        [
+    [
+	"LLS-Red+fr",
+	{
+	    "detector": null,
+	    "dye": "JF-549",
+	    "excitation": "561-laser",
+	    "ex_path": [],
+	    "em_path": [
+		{
+		    "filter": "Zeiss-BP570-610_IR+",
+		    "mode": "t"
+		},
+		{
+		    "filter": "Zeiss-SBS-LP640",
+		    "mode": "t"
+		}
+	    ]
+	}
+    ],
+    [
+	"LLS-Farred",
+	{
+	    "detector": null,
+	    "dye": "JFx-650",
+	    "excitation": "561-laser",
+	    "ex_path": [],
+	    "em_path": [
+		{
+		    "filter": "Zeiss-SBS-LP640",
+		    "mode": "r"
+		},
+		{
+		    "filter": "Zeiss-BP495-550_LP655",
+		    "mode": "t"
+		}
+	    ]
+	}
+    ],
+    [
 	"Axioskop DAPI",
 	{
 	    "detector": null,
