@@ -1,4 +1,5 @@
 [
+  ".#BODIPY-TR",
   "Alexa-488",
   "Alexa-532",
   "Alexa-546",
@@ -14,6 +15,7 @@
   "Atto-633",
   "Atto-647N",
   "Atto-700",
+  "BODIPY-TR",
   "CAL-Fluor-Orange-560",
   "CAL-Fluor-Red-590",
   "CAL-Fluor-Red-610",
@@ -62,10 +64,15 @@
   "iFlour-810",
   "lysotracker-red",
   "mBeRFP",
+  "mChartreuse",
   "mCherry",
   "mKate2",
+  "mLemon",
   "mRFP",
   "mRuby2",
   "mScarlet",
-  "mTurquoise"
+  "mScarlet3",
+  "mStayGold",
+  "mTurquoise",
+  "sfGFP"
 ]
