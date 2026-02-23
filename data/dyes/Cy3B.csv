@@ -2,6 +2,7 @@
 ## Name: Cy3B
 Extinction coefficient: 130000
 Quantum Yield: 0.67
+wavelength,absorption,emission
 425,0,0.007300000172108412
 426,0,0.007300000172108412
 427,0,0.007300000172108412

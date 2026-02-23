@@ -2,6 +2,7 @@
 ## Name: Atto643
 Extinction coefficient: 150000
 Quantum Yield: 0.62
+wavelength,absorption,emission
 300,0.09264242649078369,0
 301,0.09636060893535614,0
 302,0.09996406733989716,0
