@@ -392,7 +392,7 @@
 	    "em_path": [
 		{
 		    "filter": "Zeiss-SBS-LP565",
-		    "mode": "r"
+		    "mode": "t"
 		},
 		{
 		    "filter": "Zeiss-BP500-550_IR+",
