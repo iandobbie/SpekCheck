@@ -1,5 +1,4 @@
 [
-  ".#BODIPY-TR",
   "Alexa-488",
   "Alexa-532",
   "Alexa-546",
@@ -13,6 +12,7 @@
   "Atto-590",
   "Atto-594",
   "Atto-633",
+  "Atto-643",
   "Atto-647N",
   "Atto-700",
   "BODIPY-TR",
@@ -25,6 +25,7 @@
   "CF-680",
   "CFP",
   "Calcofluor-M2R",
+  "Cy3B",
   "Cy5",
   "DAPI",
   "DRAQ5",
