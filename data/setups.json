@@ -606,6 +606,97 @@
 		}
 	    ]
 	}
+    ],
+    [
+	"Picoqaunt 482/35 pol",
+	{
+	    "detector": null,
+	    "dye": null,
+	    "excitation": null,
+	    "ex_path": [],
+	    "em_path": [
+		{
+		    "filter": "Pico-HC-482-35",
+		    "mode": "t"
+		}
+	    ]
+	}
+    ],
+    [
+	"Picoquant 520/600 green",
+	{
+	    "detector": null,
+	    "dye": null,
+	    "excitation": null,
+	    "ex_path": [],
+	    "em_path": [
+		{
+		    "filter": "Pico-H-560-LPXR",
+		    "mode": "r"
+		},
+		{
+		    "filter": "Pico-HC-520-35",
+		    "mode": "t"
+		}
+	    ]
+	}
+    ],
+    [
+	"Picoquant 520/600 red",
+	{
+	    "detector": null,
+	    "dye": null,
+	    "excitation": null,
+	    "ex_path": [],
+	    "em_path": [
+		{
+		    "filter": "Pico-H-560-LPXR",
+		    "mode": "t"
+		},
+		{
+		    "filter": "Pico-ET-600-50m",
+		    "mode": "t"
+		}
+	    ]
+	}
+    ],
+    [
+	"Picoquant 520/690 green",
+	{
+	    "detector": null,
+	    "dye": null,
+	    "excitation": null,
+	    "ex_path": [],
+	    "em_path": [
+		{
+		    "filter": "Pico-T-635-lpxr",
+		    "mode": "r"
+		},
+		{
+		    "filter": "Pico-HC-520-35",
+		    "mode": "t"
+		}
+	    ]
+	}
+    ],
+    [
+	"Picoquant 520/690 farred",
+	{
+	    "detector": null,
+	    "dye": null,
+	    "excitation": null,
+	    "ex_path": [],
+	    "em_path": [
+		{
+		    "filter": "Pico-T-635-lpxr",
+		    "mode": "t"
+		},
+		{
+		    "filter": "Pico-H-690-70",
+		    "mode": "t"
+		}
+	    ]
+	}
     ]
 ]
 
