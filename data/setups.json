@@ -697,6 +697,44 @@
 		}
 	    ]
 	}
+    ],
+    [
+	"Picoquant 482/550 blue",
+	{
+	    "detector": null,
+	    "dye": null,
+	    "excitation": null,
+	    "ex_path": [],
+	    "em_path": [
+		{
+		    "filter": "Pico-H-488-LPXR",
+		    "mode": "r"
+		},
+		{
+		    "filter": "Pico-HC-482-35",
+		    "mode": "t"
+		}
+	    ]
+	}
+    ],
+    [
+	"Picoquant 482/550 blue",
+	{
+	    "detector": null,
+	    "dye": null,
+	    "excitation": null,
+	    "ex_path": [],
+	    "em_path": [
+		{
+		    "filter": "Pico-H-488-LPXR",
+		    "mode": "t"
+		},
+		{
+		    "filter": "Pico-FF01-550-49",
+		    "mode": "t"
+		}
+	    ]
+	}
     ]
 ]
 
