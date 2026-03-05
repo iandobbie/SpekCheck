@@ -608,6 +608,62 @@
 	}
     ],
     [
+	"AxioObserver Green",
+	{
+	    "detector": null,
+	    "dye": null,
+	    "excitation": "Metal-Halide-lamp",
+	    "ex_path": [
+		{
+		    "filter": "DM-T495lpxr",
+		    "mode": "r"
+		},
+		{
+		    "filter": "ET-470-40x",
+		    "mode": "t"
+		}
+	    ],
+	    "em_path": [
+		{
+		    "filter": "DM-T495lpxr",
+		    "mode": "t"
+		},
+		{
+		    "filter": "ET-525-50m",
+		    "mode": "t"
+		}
+	    ]
+	}
+    ],
+    [
+	"AxioObserver Farred",
+	{
+	    "detector": null,
+	    "dye": null,
+	    "excitation": "Metal-Halide-lamp",
+	    "ex_path": [
+		{
+		    "filter": "Zeiss-FT-660",
+		    "mode": "r"
+		},
+		{
+		    "filter": "Zeiss-BP-640-30",
+		    "mode": "t"
+		}
+	    ],
+	    "em_path": [
+		{
+		    "filter": "Zeiss-FT-660",
+		    "mode": "t"
+		},
+		{
+		    "filter": "Zeiss-BP-690-50",
+		    "mode": "t"
+		}
+	    ]
+	}
+    ],
+    [
 	"Picoqaunt 482/35 pol",
 	{
 	    "detector": null,
