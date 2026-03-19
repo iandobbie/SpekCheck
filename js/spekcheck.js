@@ -549,6 +549,80 @@ Filter.prototype.properties = Data.prototype.properties.concat([
 ]);
 
 
+// A synthetic filter that generates a rectangular transmission window
+// between two wavelengths.
+//
+// Unlike normal filters, this generates its spectrum dynamically based on
+// the wavelength parameters, and the transmission spectrum is composed on demand.
+class SpectralSelectionFilter
+{
+    constructor(min_wavelength = 500, max_wavelength = 600) {
+        this.uid = 'spectral-selection';
+        this.min_wavelength = min_wavelength;
+        this.max_wavelength = max_wavelength;
+    }
+
+    // Generate a transmission spectrum for given wavelengths.
+    // Transmission is 1.0 between min and max, 0.0 outside.
+    getTransmissionSpectrum(wavelengths) {
+        const min = this.min_wavelength;
+        const max = this.max_wavelength;
+        const data = wavelengths.map(w => (w >= min && w <= max) ? 1.0 : 0.0);
+        return new Spectrum(wavelengths.slice(0), data);
+    }
+
+    // Get transmission spectrum interpolated/generated for a specific wavelength array.
+    get transmission() {
+        // This is a getter without a backing field. Since we don't store specific
+        // wavelengths, we return a spectrum that will be interpolated.
+        // If no wavelengths have been set elsewhere, use a reasonable default range.
+        const wavelengths = new Array(401);
+        for (let i = 0; i < wavelengths.length; i++) {
+            wavelengths[i] = 300 + i; // 300-700nm range
+        }
+        return this.getTransmissionSpectrum(wavelengths);
+    }
+
+    // Compute transmission for any wavelength array by generating transmission
+    // This replaces the normal interpolate method on Spectrum
+    interpolate(wavelengths) {
+        return this.getTransmissionSpectrum(wavelengths).data;
+    }
+
+    // For compatibility with Filter reflection mode
+    get reflection() {
+        // Return 1.0 - transmission
+        const wavelengths = new Array(401);
+        for (let i = 0; i < wavelengths.length; i++) {
+            wavelengths[i] = 300 + i;
+        }
+        const trans_spectrum = this.transmission;
+        const data = trans_spectrum.data.map(x => 1.0 - x);
+        return new Spectrum(trans_spectrum.wavelength, data);
+    }
+
+    // Validate that wavelengths are in sensible order
+    validate() {
+        if (typeof this.min_wavelength !== 'number')
+            return "min_wavelength must be a number";
+        if (typeof this.max_wavelength !== 'number')
+            return "max_wavelength must be a number";
+        if (this.min_wavelength >= this.max_wavelength)
+            return "min_wavelength must be less than max_wavelength";
+        if (this.min_wavelength < 200 || this.max_wavelength > 1200)
+            return "wavelengths must be in reasonable range (200-1200 nm)";
+        return null;
+    }
+
+    isValid() {
+        const error = this.validate();
+        this.validation_error = error;
+        return error === null;
+    }
+}
+SpectralSelectionFilter.prototype.validation_error = null;
+
+
 // Meant to represents one of the two paths (excitation and emission)
 // on a Setup.
 class FilterStack
@@ -1313,6 +1387,137 @@ class FilterStackView
 }
 
 
+// UI view for controlling a spectral selection filter with sliders and text inputs.
+//
+// This manages a SpectralSelectionFilter that is applied to an emission path.
+// It provides:
+//   - Two sliders for min and max wavelengths
+//   - Two text input boxes for direct value entry
+//   - Toggle to enable/disable the spectral selection (add/remove from path)
+class SpectralSelectionView
+{
+    constructor(el, filterstack) {
+        this._el = el;
+        this._filterstack = filterstack;
+        this._filter = new SpectralSelectionFilter();
+        this._enabled = false;
+
+        // Get references to the input elements
+        this._min_slider = el.querySelector('#spectral-min-slider');
+        this._max_slider = el.querySelector('#spectral-max-slider');
+        this._min_input = el.querySelector('#spectral-min-input');
+        this._max_input = el.querySelector('#spectral-max-input');
+        this._enable_checkbox = el.querySelector('#spectral-enable');
+
+        // Set initial values
+        this._min_slider.value = this._filter.min_wavelength;
+        this._max_slider.value = this._filter.max_wavelength;
+        this._min_input.value = this._filter.min_wavelength;
+        this._max_input.value = this._filter.max_wavelength;
+
+        // Bind event listeners
+        this._min_slider.addEventListener('input', this.handleMinSliderChange.bind(this));
+        this._max_slider.addEventListener('input', this.handleMaxSliderChange.bind(this));
+        this._min_input.addEventListener('change', this.handleMinInputChange.bind(this));
+        this._max_input.addEventListener('change', this.handleMaxInputChange.bind(this));
+        this._enable_checkbox.addEventListener('change', this.handleToggle.bind(this));
+    }
+
+    handleMinSliderChange(ev) {
+        const val = parseFloat(ev.target.value);
+        // Prevent min from exceeding max
+        if (val >= this._filter.max_wavelength) {
+            ev.target.value = this._filter.min_wavelength;
+            return;
+        }
+        this._filter.min_wavelength = val;
+        this._min_input.value = val;
+        this.updateFilter();
+    }
+
+    handleMaxSliderChange(ev) {
+        const val = parseFloat(ev.target.value);
+        // Prevent max from going below min
+        if (val <= this._filter.min_wavelength) {
+            ev.target.value = this._filter.max_wavelength;
+            return;
+        }
+        this._filter.max_wavelength = val;
+        this._max_input.value = val;
+        this.updateFilter();
+    }
+
+    handleMinInputChange(ev) {
+        const val = parseFloat(ev.target.value);
+        if (isNaN(val)) {
+            ev.target.value = this._filter.min_wavelength;
+            return;
+        }
+        if (val >= this._filter.max_wavelength) {
+            ev.target.value = this._filter.min_wavelength;
+            return;
+        }
+        this._filter.min_wavelength = val;
+        this._min_slider.value = val;
+        this.updateFilter();
+    }
+
+    handleMaxInputChange(ev) {
+        const val = parseFloat(ev.target.value);
+        if (isNaN(val)) {
+            ev.target.value = this._filter.max_wavelength;
+            return;
+        }
+        if (val <= this._filter.min_wavelength) {
+            ev.target.value = this._filter.max_wavelength;
+            return;
+        }
+        this._filter.max_wavelength = val;
+        this._max_slider.value = val;
+        this.updateFilter();
+    }
+
+    handleToggle(ev) {
+        if (ev.target.checked) {
+            this.enable();
+        } else {
+            this.disable();
+        }
+    }
+
+    enable() {
+        if (this._enabled)
+            return;
+        this._enabled = true;
+        // Add the filter to the emission path
+        this._filterstack.push({'filter': this._filter, 'mode': 't'});
+    }
+
+    disable() {
+        if (!this._enabled)
+            return;
+        this._enabled = false;
+        // Remove the filter from the emission path
+        // Find the index of our filter
+        for (let i = 0; i < this._filterstack._stack.length; i++) {
+            if (this._filterstack._stack[i].filter === this._filter) {
+                this._filterstack.removeElem(i);
+                break;
+            }
+        }
+    }
+
+    updateFilter() {
+        // Trigger the filterstack to recalculate
+        // If already enabled, we need to reset the transmission cache and trigger a change
+        if (this._enabled) {
+            this._filterstack._resetTransmission();
+            this._filterstack.trigger('change');
+        }
+    }
+}
+
+
 // Controls the customisation of the FilterStack.
 //
 // There must be three ul elements inside $el with the following ids:
@@ -1347,6 +1552,12 @@ class PathBuilder
             'em_path': new FilterStackView(cols.em_path.querySelector('ul'),
                                            setup.em_path, in_path_template),
         };
+
+        // Initialize spectral selection view for emission path
+        this.spectral_selection = new SpectralSelectionView(
+            cols.em_path,
+            setup.em_path
+        );
 
         // The ondragover action is for the div with the column, not
         // for the list.  Otherwise we can't drop if the list is
