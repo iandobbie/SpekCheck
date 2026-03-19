@@ -1553,25 +1553,6 @@ class SpectralSelectionView
         // Enable the filter
         this.enable();
     }
-
-    // Check if spectral selection is enabled
-    isEnabled() {
-        return this._enabled;
-    }
-
-    // Disable without triggering UI update (used during setup load)
-    disableQuietly() {
-        if (!this._enabled)
-            return;
-        this._enabled = false;
-        // Remove the filter from the emission path without triggering checkbox update
-        for (let i = 0; i < this._filterstack._stack.length; i++) {
-            if (this._filterstack._stack[i].filter === this._filter) {
-                this._filterstack.removeElem(i);
-                break;
-            }
-        }
-    }
 }
 
 
