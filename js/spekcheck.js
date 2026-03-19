@@ -875,6 +875,12 @@ class SetupDescription
                     return `values of ${ path_name } must have 'filter'`;
                 if (x.mode !== 'r' && x.mode !== 't')
                     return `mode of '${ x.filter }' must be r or t`;
+                
+                // Spectral selections must have min and max
+                if (x.filter === 'spectral') {
+                    if (typeof(x.min) !== 'number' || typeof(x.max) !== 'number')
+                        return `spectral filter must have 'min' and 'max' as numbers`;
+                }
             }
         }
     }
@@ -1499,6 +1505,7 @@ class SpectralSelectionView
         if (this._enabled)
             return;
         this._enabled = true;
+        this._enable_checkbox.checked = true;
         // Add the filter to the emission path
         this._filterstack.push({'filter': this._filter, 'mode': 't'});
     }
@@ -1523,6 +1530,46 @@ class SpectralSelectionView
         if (this._enabled) {
             this._filterstack._resetTransmission();
             this._filterstack.trigger('change');
+        }
+    }
+
+    // Load spectral selection values from a setup definition
+    // Args:
+    //     spectral_def (Object): {filter: "spectral", mode: "t", min: number, max: number}
+    loadFromSetup(spectral_def) {
+        if (spectral_def.filter !== 'spectral')
+            return;
+        
+        // Set the wavelength values from the setup
+        this._filter.min_wavelength = spectral_def.min;
+        this._filter.max_wavelength = spectral_def.max;
+        
+        // Update UI controls
+        this._min_slider.value = spectral_def.min;
+        this._max_slider.value = spectral_def.max;
+        this._min_input.value = spectral_def.min;
+        this._max_input.value = spectral_def.max;
+        
+        // Enable the filter
+        this.enable();
+    }
+
+    // Check if spectral selection is enabled
+    isEnabled() {
+        return this._enabled;
+    }
+
+    // Disable without triggering UI update (used during setup load)
+    disableQuietly() {
+        if (!this._enabled)
+            return;
+        this._enabled = false;
+        // Remove the filter from the emission path without triggering checkbox update
+        for (let i = 0; i < this._filterstack._stack.length; i++) {
+            if (this._filterstack._stack[i].filter === this._filter) {
+                this._filterstack.removeElem(i);
+                break;
+            }
         }
     }
 }
@@ -2280,8 +2327,17 @@ class SpekCheck
             // TODO: new replace method on path so that it can
             // identify if the change is small (or maybe none)
             path.empty();
+            
+            // Handle spectral selections separately (only in em_path)
+            let spectral_def = null;
+            let filter_list = setup[path_name];
+                        
             const filter_promises = [];
-            for (let fpos of setup[path_name]) {
+            for (let fpos of filter_list) {
+                if (fpos.filter === 'spectral') {
+                    this.path_builder.spectral_selection.loadFromSetup(fpos);
+                    continue;
+                }
                 filter_promises.push(
                     this.collection.filter.get(fpos.filter).then(
                         (f) => ({filter: f, mode: fpos.mode})
