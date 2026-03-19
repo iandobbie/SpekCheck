@@ -741,7 +741,9 @@ class FilterStack
     }
 
     describe() {
-        return this._stack.map(x => ({filter: x.filter.uid, mode: x.mode}));
+                return this._stack.map(x => ((x.filter.uid === 'spectral-selection' ) ? 
+                ({filter: 'spectral', mode: x.mode, min: x.filter.min_wavelength, max: x.filter.max_wavelength}) 
+                : ({filter: x.filter.uid, mode: x.mode})));
     }
 
     // Like empty, but doesn't trigger a change event.  To be used by
