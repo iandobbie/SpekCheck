@@ -569,7 +569,7 @@ class SpectralSelectionFilter
         // wavelengths, we return a spectrum that will be interpolated.
         // If no wavelengths have been set elsewhere, use a reasonable default range.
         const minw=Math.min(this.min_wavelength, 300); // min of 300 or min_wavelength
-        constmaxw=Math.max(this.max_wavelength, 700); //max of 700 or max_wavelength
+        const maxw=Math.max(this.max_wavelength, 700); //max of 700 or max_wavelength
         const wavelengths = new Array(maxw-minw+1);
         for (let i = 0; i < wavelengths.length; i++) {
             wavelengths[i] = minw + i; 
