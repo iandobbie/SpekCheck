@@ -562,14 +562,6 @@ class SpectralSelectionFilter
         this.max_wavelength = max_wavelength;
     }
 
-    // Generate a transmission spectrum for given wavelengths.
-    // Transmission is 1.0 between min and max, 0.0 outside.
-    getTransmissionSpectrum(wavelengths) {
-        const min = this.min_wavelength;
-        const max = this.max_wavelength;
-        const data = wavelengths.map(w => (w >= min && w <= max) ? 1.0 : 0.0);
-        return new Spectrum(wavelengths.slice(0), data);
-    }
 
     // Get transmission spectrum interpolated/generated for a specific wavelength array.
     get transmission() {
@@ -580,22 +572,14 @@ class SpectralSelectionFilter
         for (let i = 0; i < wavelengths.length; i++) {
             wavelengths[i] = 300 + i; // 300-700nm range
         }
-        return this.getTransmissionSpectrum(wavelengths);
+        const data = wavelengths.map(w => (w >= this.min_wavelength && 
+            w <= this.max_wavelength) ? 1.0 : 0.0);
+        return new Spectrum(wavelengths.slice(0), data);
     }
 
-    // Compute transmission for any wavelength array by generating transmission
-    // This replaces the normal interpolate method on Spectrum
-    interpolate(wavelengths) {
-        return this.getTransmissionSpectrum(wavelengths).data;
-    }
 
     // For compatibility with Filter reflection mode
     get reflection() {
-        // Return 1.0 - transmission
-        const wavelengths = new Array(401);
-        for (let i = 0; i < wavelengths.length; i++) {
-            wavelengths[i] = 300 + i;
-        }
         const trans_spectrum = this.transmission;
         const data = trans_spectrum.data.map(x => 1.0 - x);
         return new Spectrum(trans_spectrum.wavelength, data);
@@ -809,6 +793,10 @@ class FilterStack
             this._stack = old_stack.slice(0, i).concat(old_stack.slice(i+1));
             this._resetTransmission();
             this.trigger('change');
+            // would be nice if we could remove the tick for the spectral selection filter.
+            //if (removed.filter.uid === 'spectral-selection') {
+            //    removed.disable()
+            //}
         }
         return removed;
     }
@@ -1421,6 +1409,9 @@ class SpectralSelectionView
         this._min_input.addEventListener('change', this.handleMinInputChange.bind(this));
         this._max_input.addEventListener('change', this.handleMaxInputChange.bind(this));
         this._enable_checkbox.addEventListener('change', this.handleToggle.bind(this));
+
+        // Listen for changes in the filterstack to detect when filter is removed
+        this._filterstack.on('change', this.handleFilterStackChange.bind(this));
     }
 
     handleMinSliderChange(ev) {
@@ -1485,6 +1476,23 @@ class SpectralSelectionView
         }
     }
 
+    handleFilterStackChange() {
+        // Check if our filter is still in the filterstack
+        let filter_found = false;
+        for (let i = 0; i < this._filterstack._stack.length; i++) {
+            if (this._filterstack._stack[i].filter === this._filter) {
+                filter_found = true;
+                break;
+            }
+        }
+
+        // If filter was removed but checkbox is still checked, uncheck it
+        if (!filter_found && this._enabled) {
+            this._enabled = false;
+            this._enable_checkbox.checked = false;
+        }
+    }
+
     enable() {
         if (this._enabled)
             return;
@@ -1540,6 +1548,7 @@ class PathBuilder
             'filters': el.querySelector('#filters-view'),
             'ex_path': el.querySelector('#ex-path'),
             'em_path': el.querySelector('#em-path'),
+            'spectral_selection': el.querySelector('#spectral-selection'),
         };
 
         const in_collection_template = this._li_template('collection-filters');
@@ -1555,7 +1564,7 @@ class PathBuilder
 
         // Initialize spectral selection view for emission path
         this.spectral_selection = new SpectralSelectionView(
-            cols.em_path,
+            cols.spectral_selection,
             setup.em_path
         );
 
