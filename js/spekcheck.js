@@ -568,9 +568,11 @@ class SpectralSelectionFilter
         // This is a getter without a backing field. Since we don't store specific
         // wavelengths, we return a spectrum that will be interpolated.
         // If no wavelengths have been set elsewhere, use a reasonable default range.
-        const wavelengths = new Array(401);
+        const minw=Math.min(this.min_wavelength, 300); // min of 300 or min_wavelength
+        constmaxw=Math.max(this.max_wavelength, 700); //max of 700 or max_wavelength
+        const wavelengths = new Array(maxw-minw+1);
         for (let i = 0; i < wavelengths.length; i++) {
-            wavelengths[i] = 300 + i; // 300-700nm range
+            wavelengths[i] = minw + i; 
         }
         const data = wavelengths.map(w => (w >= this.min_wavelength && 
             w <= this.max_wavelength) ? 1.0 : 0.0);
@@ -593,8 +595,8 @@ class SpectralSelectionFilter
             return "max_wavelength must be a number";
         if (this.min_wavelength >= this.max_wavelength)
             return "min_wavelength must be less than max_wavelength";
-        if (this.min_wavelength < 200 || this.max_wavelength > 1200)
-            return "wavelengths must be in reasonable range (200-1200 nm)";
+        if (this.min_wavelength < 300 || this.max_wavelength > 1000)
+            return "wavelengths must be in reasonable range (300-1000 nm)";
         return null;
     }
 
