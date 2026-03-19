@@ -788,9 +788,40 @@
 		{
 		    "filter": "Pico-FF01-550-49",
 		    "mode": "t"
+		},
+		{
+		    "filter": "spectral",
+		    "mode": "t",
+		    "min": 444,
+		    "max": 550
+		}
+	    ]
+	}
+    ],
+    [
+	"FV4000 Alexa488",
+	{
+	    "detector": null,
+	    "dye": "Alexa-488",
+	    "excitation": "488-laser",
+	    "ex_path": [
+		{
+		    "filter": "FV4000-primary-dichroic",
+		    "mode": "r"
+		}
+	    ],
+	    "em_path": [
+		{
+		    "filter": "FV4000-primary-dichroic",
+		    "mode": "t"
+		},
+		{
+		    "filter": "spectral",
+		    "mode": "t",
+		    "min": 500,
+		    "max": 550
 		}
 	    ]
 	}
     ]
 ]
-
