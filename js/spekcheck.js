@@ -2310,13 +2310,10 @@ class SpekCheck
             // TODO: new replace method on path so that it can
             // identify if the change is small (or maybe none)
             path.empty();
-            
-            // Handle spectral selections separately (only in em_path)
-            let spectral_def = null;
-            let filter_list = setup[path_name];
-                        
+
             const filter_promises = [];
-            for (let fpos of filter_list) {
+            for (let fpos of setup[path_name]) {
+		// Handle spectral selections separately (only in em_path)
                 if (fpos.filter === 'spectral') {
                     this.path_builder.spectral_selection.loadFromSetup(fpos);
                     continue;
