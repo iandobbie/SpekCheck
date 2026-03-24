@@ -799,6 +799,32 @@
 	}
     ],
     [
+	"FV4000 DAPI",
+	{
+	    "detector": null,
+	    "dye": "DAPI",
+	    "excitation": "405-laser",
+	    "ex_path": [
+		{
+		    "filter": "FV4000-primary-dichroic",
+		    "mode": "r"
+		}
+	    ],
+	    "em_path": [
+		{
+		    "filter": "FV4000-primary-dichroic",
+		    "mode": "t"
+		},
+		{
+		    "filter": "spectral",
+		    "mode": "t",
+		    "min": 430,
+		    "max": 470
+		}
+	    ]
+	}
+    ],
+    [
 	"FV4000 Alexa488",
 	{
 	    "detector": null,
@@ -820,6 +846,58 @@
 		    "mode": "t",
 		    "min": 500,
 		    "max": 550
+		}
+	    ]
+	}
+    ],
+    [
+	"FV4000 Alexa568",
+	{
+	    "detector": null,
+	    "dye": "Alexa-568",
+	    "excitation": "561-laser",
+	    "ex_path": [
+		{
+		    "filter": "FV4000-primary-dichroic",
+		    "mode": "r"
+		}
+	    ],
+	    "em_path": [
+		{
+		    "filter": "FV4000-primary-dichroic",
+		    "mode": "t"
+		},
+		{
+		    "filter": "spectral",
+		    "mode": "t",
+		    "min": 570,
+		    "max": 620
+		}
+	    ]
+	}
+    ],
+    [
+	"FV4000 Alexa647",
+	{
+	    "detector": null,
+	    "dye": "Alexa-647",
+	    "excitation": "640-laser",
+	    "ex_path": [
+		{
+		    "filter": "FV4000-primary-dichroic",
+		    "mode": "r"
+		}
+	    ],
+	    "em_path": [
+		{
+		    "filter": "FV4000-primary-dichroic",
+		    "mode": "t"
+		},
+		{
+		    "filter": "spectral",
+		    "mode": "t",
+		    "min": 650,
+		    "max": 710
 		}
 	    ]
 	}
