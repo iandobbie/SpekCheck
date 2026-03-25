@@ -276,7 +276,7 @@
 	{
 	    "detector": null,
 	    "dye": null,
-	    "excitation": "730-laser",
+	    "excitation": "750-laser",
 	    "ex_path": [
 		{
 		    "filter": "DM-Ziva-penta",

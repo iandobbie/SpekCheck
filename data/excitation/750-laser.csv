@@ -1,0 +1,6 @@
+## Type: laser
+## Name: 750-laser
+wavelength,intensity
+749,0
+750,1.0
+751,0
