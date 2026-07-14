@@ -142,10 +142,12 @@ images/visible-spectrum.png: src/create-spectrum.py
 ## visible-spectrum.png is a prerequesite because it is linked from
 ## the svg file.
 images/spekcheck-logo.png: images/spekcheck-logo.svg images/visible-spectrum.png
-	$(RSVG_CONVERT) --format png $< > $@
+	inkscape $< \
+	    --export-filename=$@ --export-type=png
 
 images/favicon.png: images/spekcheck-logo.svg images/visible-spectrum.png
-	$(RSVG_CONVERT) --format png --width 16 --height 16 $< > $@
+	inkscape $< \
+	    --export-filename=$@ --export-type=png -w 16 -h 16
 
 images/micron-logo.png: images/micron-logo.svg
 	$(RSVG_CONVERT) --format png $< > $@
