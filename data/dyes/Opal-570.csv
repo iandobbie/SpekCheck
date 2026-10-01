@@ -1,8 +1,8 @@
 ## Type: dye
 ## Name: Opal-570
 ## Data scraped from graph.
-Extinction coefficient: 1000
-Quantum Yield: .5
+Extinction coefficient:
+Quantum Yield:
 wavelength,absorption,emission
 461,0.019968578,0
 462,0.020072303,0
